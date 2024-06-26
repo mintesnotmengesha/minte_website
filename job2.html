@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Finder Pro</title>
+    
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #af8f8f;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #353434;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    transition: background-color 0.3s;
+}
+
+header h1 {
+    margin: 0;
+    animation: fadeInDown 1s;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0.5rem;
+}
+
+nav ul li a {
+    color: #1a1818;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #ca7e7e;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ede3e3;
+    transform: scale(1.1);
+}
+
+#hero {
+    position: relative;
+    height: 300px;
+}
+
+#hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #150209;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    animation: fadeInUp 2s;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+}
+
+.hero-text button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.hero-text button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.section {
+    padding: 2rem;
+    animation: fadeIn 1s;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.filters input, .filters select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.filters input:focus, .filters select:focus {
+    border-color: #333;
+}
+
+#job-listings-container, #company-profiles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.job-listing, .company-profile {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+    width: calc(33% - 2rem);
+    transition: transform 0.3s;
+}
+
+.job-listing:hover, .company-profile:hover {
+    transform: scale(1.02);
+}
+
+.job-listing h3, .company-profile h3 {
+    margin: 0;
+    color: #333;
+}
+
+.job-listing p, .company-profile p {
+    margin: 0.5rem 0;
+}
+
+.profile-form {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-form form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    animation: fadeIn 2s;
+}
+
+.profile-form label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.profile-form input, .profile-form textarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.profile-form input:focus, .profile-form textarea:focus {
+    border-color: #333;
+}
+
+.profile-form button {
+    padding: 0.5rem 1rem;
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Job Finder Pro</h1>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#job-listings">Job Listings</a></li>
+                <li><a href="#company-profiles">Companies</a></li>
+                <li><a href="#user-profiles">Profile</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <video autoplay muted  loop id="hero-video">
+            <source src="hero-video.mp4" type="video/mp4".
+           target_blank=" Your browser does not support HTML5 video">
+        </video>
+        <div class="hero-text">
+            <h2>Your Dream Job Awaits</h2>
+            <p>Find the best jobs or the perfect candidates</p>
+           <button onclick="toggleSound()">Toggle Sound</button>
+
+            <button onclick="scrollToSection('job-listings')">Search Jobs</button>
+            <button onclick="scrollToSection('company-profiles')">Post a Vacancy</button>
+            <button onclick="scrollToSection('user-profiles')">Create Profile</button>
+        </div>
+    </section>
+
+    <section id="job-listings" class="section">
+        <h2>Job Listings</h2>
+        <div class="filters">
+            <input type="text" id="search-input" placeholder="Search for jobs...">
+            <select id="location-filter">
+                <option value="">All Locations</option>
+                <option value="new-york">New York</option>
+                <option value="san-francisco">San Francisco</option>
+                <option value="chicago">Chicago</option>
+            </select>
+            <select id="industry-filter">
+                <option value="">All Industries</option>
+                <option value="tech">Tech</option>
+                <option value="finance">Finance</option>
+                <option value="healthcare">Healthcare</option>
+            </select>
+            <select id="experience-filter">
+                <option value="">All Levels</option>
+                <option value="entry">Entry Level</option>
+                <option value="mid">Mid Level</option>
+                <option value="senior">Senior Level</option>
+            </select>
+        </div>
+        <div id="job-listings-container">
+            <!-- Job Listings will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <section id="company-profiles" class="section">
+        <h2>Company Profiles</h2>
+        <div id="company-profiles-container">
+            <!-- Company Profiles will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <section id="user-profiles" class="section">
+        <h2>Create Your Profile</h2>
+        <div class="profile-form">
+            <form id="profile-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="resume">Upload Resume:</label>
+                <input type="file" id="resume" name="resume" required>
+
+                <button type="submit">Create Profile</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="faq" class="section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>How do I search for a job?</h3>
+            <p>Use the search bar and filters to find jobs that match your criteria.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I create a profile?</h3>
+            <p>Go to the 'Create Profile' section and fill out the form with your details.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I post a job vacancy?</h3>
+            <p>Go to the 'Post a Vacancy' section and fill out the form with the job details.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Job Finder Pro</h3>
+            <p>&copy; 2024 Job Finder Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+let isMuted =false;
+const video = document.getElementById('hero-video');
+
+function toggleSound() {
+    
+    if (video.muted) {
+        video.muted = false;
+        isMuted=false;
+    } else {
+        video.muted = true;
+        isMuted=true;
+    }
+}
+// Example of loading job listings dynamically (replace with your data fetching logic)
+document.addEventListener('DOMContentLoaded', function() {
+    const jobListingsContainer = document.getElementById('job-listings-container');
+
+    // Example data
+    const jobs = [
+        { title: 'Software Engineer', company: 'Tech Co.', location: 'San Francisco', experience: 'Mid Level' },
+        { title: 'Financial Analyst', company: 'Finance Inc.', location: 'New York', experience: 'Senior Level' },
+        { title: 'Registered Nurse', company: 'Healthcare Ltd.', location: 'Chicago', experience: 'Entry Level' }
+    ];
+
+    // Render job listings
+    jobs.forEach(job => {
+        const jobListing = document.createElement('div');
+        jobListing.classList.add('job-listing');
+        jobListing.innerHTML = `
+            <h3>${job.title}</h3>
+            <p>${job.company} - ${job.location}</p>
+            <p>${job.experience}</p>
+        `;
+        jobListingsContainer.appendChild(jobListing);
+    });
+});
+</script>
+</body>
+</html>
+
